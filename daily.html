@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little More Us — Relationship Reflection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #fcf9f6;
+      --card-bg: #ffffff;
+      --accent-rose: #d67a8b;
+      --accent-wine: #6e1a2f;
+      --accent-gold: #c29553;
+      --text-dark: #2c2527;
+      --text-muted: #6b5e62;
+      --border-subtle: #f0e3e5;
+      --shadow-soft: 0 10px 30px rgba(110, 26, 47, 0.06);
+      --shadow-hover: 0 14px 40px rgba(110, 26, 47, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      color: var(--accent-wine);
+    }
+
+    /* Navbar */
+    .navbar {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      background-color: #ffffff;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      text-decoration: none;
+      color: var(--accent-wine);
+    }
+
+    .back-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent-rose);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-wine);
+    }
+
+    /* Main Section */
+    main {
+      flex: 1;
+      padding: 50px 0 80px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      background-color: #f7e4e7;
+      color: var(--accent-wine);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 45px 40px;
+    }
+
+    .header-text {
+      margin-bottom: 30px;
+    }
+
+    .header-text h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .header-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent-wine);
+      margin-bottom: 6px;
+    }
+
+    .hint {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 13px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      border: 1px solid #dcb5bd;
+      border-radius: 8px;
+      background-color: #fdfcfb;
+      color: var(--text-dark);
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-wine);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(110, 26, 47, 0.08);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 125px;
+    }
+
+    /* Optional Photo Dropzone */
+    .file-dropzone {
+      position: relative;
+      border: 1.5px dashed #dcb5bd;
+      border-radius: 10px;
+      background: #fdfafb;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .file-dropzone:hover {
+      border-color: var(--accent-wine);
+      background: #faf4f5;
+    }
+
+    .file-dropzone input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-dropzone .icon {
+      font-size: 1.5rem;
+      color: var(--accent-rose);
+      margin-bottom: 4px;
+    }
+
+    .file-dropzone .upload-label {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .file-dropzone .file-name {
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: var(--accent-wine);
+      font-weight: 600;
+      display: none;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--accent-wine);
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(110, 26, 47, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #551222;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(110, 26, 47, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px 0;
+      font-size: 0.85rem;
+      color: #8c7e82;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 600px) {
+      .card { padding: 30px 20px; }
+      .header-text h1 { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="brand-title"><h3>A Little More Us</h3></a>
+      <a href="index.html" class="back-link">← Overview</a>
+    </div>
+  </nav>
+
+  <!-- Reflection Form Card -->
+  <main>
+    <div class="container">
+      <div class="card">
+        <span class="badge">Reflection Entry</span>
+
+        <div class="header-text">
+          <h1>Shared Reflections</h1>
+          <p>Take a quiet moment to reflect on your journey together. Write freely about any meaningful quality or cherished moment from these past two years. Hindi, English, and emojis are all welcome.</p>
+        </div>
+
+        <!-- Form: Sends reflections and optional photos straight to your Gmail -->
+        <form action="https://formsubmit.co/akshatgaur9569@gmail.com" method="POST" enctype="multipart/form-data">
+          <!-- Hidden configuration settings -->
+          <input type="hidden" name="_subject" value="New Relationship Reflection Entry ❤️">
+          <input type="hidden" name="_captcha" value="false">
+
+          <!-- 1. Appreciation across the relationship -->
+          <div class="form-group">
+            <label for="appreciation">1. What is one quality, gesture, or thing you deeply appreciate about your partner?</label>
+            <span class="hint">It can be anything from across your journey together—a habit, their kindness, a way they supported you, or simply who they are (English or हिंदी).</span>
+            <textarea id="appreciation" name="Partner Appreciation" class="form-control" placeholder="Write your reflection here..." required></textarea>
+          </div>
+
+          <!-- 2. Cherished Memory from the 2 years -->
+          <div class="form-group">
+            <label for="memory">2. Describe a favorite moment or memory from your time together.</label>
+            <span class="hint">Any moment from these past two years that you look back on fondly, a trip, a conversation, or a small memory that made you smile.</span>
+            <textarea id="memory" name="Cherished Memory" class="form-control" placeholder="Describe the moment..." required></textarea>
+          </div>
+
+          <!-- 3. Optional Photo Upload -->
+          <div class="form-group">
+            <label>A Photo from the Journey (Optional)</label>
+            <span class="hint">Attach a favorite picture together, a snapshot from your memories, or leave it blank.</span>
+            <div class="file-dropzone">
+              <input type="file" name="reflection_photo" accept="image/*" onchange="showFileName(this, 'photoFileName')">
+              <div class="icon">📷</div>
+              <div class="upload-label">Tap to pick from gallery or take a picture</div>
+              <div id="photoFileName" class="file-name"></div>
+            </div>
+          </div>
+
+          <!-- 4. Timing Note -->
+          <div class="form-group">
+            <label for="timing-note">Submission Window Note (Optional)</label>
+            <span class="hint">Submitting outside 10:00 AM – 12:00 PM IST? Add a short note if you like:</span>
+            <input type="text" id="timing-note" name="Timing Note / Reason" class="form-control" placeholder="e.g. Busy morning schedule / work">
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-submit">Submit Reflection</button>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>A Little More Us — Relationship Reflections & Memories</p>
+    </div>
+  </footer>
+
+  <!-- Script for showing attached file name -->
+  <script>
+    function showFileName(input, targetId) {
+      const displayElement = document.getElementById(targetId);
+      if (input.files && input.files.length > 0) {
+        displayElement.textContent = "Selected: " + input.files[0].name;
+        displayElement.style.display = "block";
+      } else {
+        displayElement.textContent = "";
+        displayElement.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f1ed">
+  <title>A Little More Us — A Private Invitation</title>
+  <style>
+    :root {
+      --cream: #fbf6f1;
+      --paper: #fffdfb;
+      --rose: #b65e70;
+      --rose-dark: #843f50;
+      --rose-pale: #f4e2e3;
+      --ink: #33282a;
+      --muted: #786a6b;
+      --line: #eadbd8;
+      --gold: #b18a58;
+      --shadow: 0 18px 55px rgba(91, 54, 57, .09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 8% 0%, rgba(244, 226, 227, .7), transparent 36rem),
+        var(--cream);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .page-shell { width: min(1080px, calc(100% - 36px)); margin: 0 auto; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 23px 0; gap: 16px; border-bottom: 1px solid rgba(182, 94, 112, .18);
+      font-family: Arial, sans-serif;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
+    .brand-mark {
+      display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+      background: var(--rose-pale); color: var(--rose-dark); font-size: 17px;
+    }
+    .private-note { color: var(--muted); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+    .hero {
+      display: grid; grid-template-columns: 1.08fr .92fr; align-items: center;
+      gap: clamp(28px, 6vw, 72px); padding: 72px 0 68px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; color: var(--rose-dark);
+      font: 700 11px/1.4 Arial, sans-serif; letter-spacing: .18em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--gold); }
+    h1 { font-size: clamp(43px, 6.2vw, 76px); line-height: 1.03; letter-spacing: -.045em; font-weight: 400; margin: 20px 0; }
+    h1 em { color: var(--rose); font-weight: 400; }
+    .hero-copy { max-width: 530px; font-size: 17px; color: var(--muted); }
+    .hero-copy strong { color: var(--ink); font-weight: 600; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; margin-top: 30px; }
+    .button {
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      padding: 14px 21px; border-radius: 999px; text-decoration: none;
+      font: 700 13px Arial, sans-serif; transition: transform .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--rose-dark); color: white; box-shadow: 0 8px 22px rgba(132, 63, 80, .18); }
+    .button-secondary { border: 1px solid var(--line); color: var(--rose-dark); background: rgba(255,255,255,.45); }
+    .tiny-note { font: 12px/1.6 Arial, sans-serif; color: var(--muted); margin-top: 15px; }
+    .visual { position: relative; min-height: 440px; display: grid; place-items: center; }
+    .visual-frame {
+      width: min(100%, 390px); min-height: 420px; position: relative; overflow: hidden;
+      border-radius: 48% 48% 22px 22px; background:
+        linear-gradient(145deg, rgba(255,255,255,.25), rgba(255,255,255,0)),
+        linear-gradient(160deg, #f1d9d9, #e9c7c9 55%, #d8a9ad);
+      box-shadow: var(--shadow); border: 8px solid rgba(255,253,251,.72);
+    }
+    .visual-frame::before, .visual-frame::after {
+      content: "♡"; position: absolute; color: rgba(255,253,251,.62); font-family: Georgia, serif;
+      line-height: 1; font-size: 125px; transform: rotate(-14deg);
+    }
+    .visual-frame::before { top: 22px; left: 20px; }
+    .visual-frame::after { right: 15px; bottom: 48px; font-size: 94px; transform: rotate(13deg); }
+    .sun {
+      position: absolute; width: 210px; height: 210px; border-radius: 50%;
+      background: rgba(255, 246, 226, .75); top: 58px; left: 50%; transform: translateX(-50%);
+      box-shadow: 0 0 0 18px rgba(255,246,226,.12), 0 0 0 40px rgba(255,246,226,.08);
+    }
+    .flower {
+      position: absolute; left: 50%; top: 95px; transform: translateX(-50%) rotate(-8deg);
+      width: 150px; height: 205px; opacity: .82;
+    }
+    .flower .stem { position:absolute; width:3px; height:145px; background:#8e8c68; left:75px; top:68px; transform:rotate(8deg); border-radius:4px; }
+    .flower .leaf { position:absolute; width:47px; height:23px; background:#9b9c78; border-radius:100% 0 100% 0; top:145px; left:38px; transform:rotate(20deg); }
+    .flower .leaf.two { left:77px; top:176px; transform:rotate(200deg); }
+    .petal { position:absolute; width:39px; height:57px; background:#fff4ef; border-radius:55% 55% 45% 45%; left:56px; top:25px; transform-origin:50% 48px; box-shadow:inset -4px -3px 0 rgba(182,94,112,.09); }
+    .petal.p2 { transform:rotate(60deg); } .petal.p3 { transform:rotate(120deg); }
+    .petal.p4 { transform:rotate(180deg); } .petal.p5 { transform:rotate(240deg); } .petal.p6 { transform:rotate(300deg); }
+    .flower .center { position:absolute; width:29px; height:29px; background:#c59b59; border-radius:50%; left:61px; top:50px; border:4px solid #f4d8a4; }
+    .quote-card {
+      position: absolute; bottom: 16px; left: -18px; max-width: 260px; padding: 20px 22px;
+      background: rgba(255,253,251,.94); border: 1px solid rgba(255,255,255,.8);
+      box-shadow: var(--shadow); border-radius: 13px;
+    }
+    .quote-card .quote-mark { color: var(--rose); font-size: 32px; line-height: 1; }
+    .quote-card p { margin: 5px 0 0; font-size: 17px; font-style: italic; line-height: 1.4; }
+    .section { padding: 62px 0; border-top: 1px solid rgba(182,94,112,.17); }
+    .section-heading { max-width: 650px; margin: 0 auto 34px; text-align: center; }
+    .section-heading h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 400; line-height: 1.15; letter-spacing: -.025em; margin: 13px 0; }
+    .section-heading p { color: var(--muted); margin: 0; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .step {
+      background: rgba(255,253,251,.78); border: 1px solid var(--line); border-radius: 16px;
+      padding: 25px 23px; box-shadow: 0 8px 28px rgba(91,54,57,.035);
+    }
+    .step-number { color: var(--rose); font: 700 11px Arial, sans-serif; letter-spacing: .16em; }
+    .step h3 { font-size: 21px; font-weight: 400; margin: 12px 0 8px; }
+    .step p { font: 14px/1.75 Arial, sans-serif; color: var(--muted); margin: 0; }
+    .reward-panel {
+      display: grid; grid-template-columns: .8fr 1.2fr; gap: 35px; align-items: center;
+      padding: clamp(25px, 5vw, 48px); background: #4b3037; color: #fff8f5; border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+    .reward-panel .eyebrow { color: #f1c9cc; }
+    .reward-panel h2 { font-size: clamp(30px, 4vw, 43px); font-weight: 400; line-height: 1.12; margin: 14px 0; }
+    .reward-panel p { color: #e7d5d4; font-size: 14px; }
+    .milestones { display: grid; gap: 10px; }
+    .milestone {
+      display: flex; justify-content: space-between; align-items: center; gap: 18px;
+      padding: 16px 18px; border: 1px solid rgba(255,255,255,.17); border-radius: 12px;
+      background: rgba(255,255,255,.055); font-family: Arial, sans-serif;
+    }
+    .milestone span { font-size: 12px; color: #e7d5d4; }
+    .milestone strong { font-size: 22px; font-weight: 600; white-space: nowrap; }
+    .terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .term { display: flex; gap: 13px; padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,253,251,.7); }
+    .term-icon { color: var(--rose); font-size: 20px; line-height: 1.3; }
+    .term strong { display: block; font-size: 15px; margin-bottom: 3px; }
+    .term p { font: 13px/1.65 Arial, sans-serif; color: var(--muted); margin: 0; }
+    .language-band {
+      margin-top: 25px; padding: 19px 22px; background: var(--rose-pale); border-radius: 12px;
+      color: var(--rose-dark); text-align: center; font-size: 15px;
+    }
+    .closing { text-align: center; max-width: 680px; margin: 0 auto; }
+    .closing .heart { color: var(--rose); font-size: 27px; }
+    .closing h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 400; line-height: 1.2; margin: 10px 0 15px; }
+    .closing p { color: var(--muted); }
+    .footer {
+      border-top: 1px solid rgba(182,94,112,.17); padding: 24px 0 32px; text-align: center;
+      color: var(--muted); font: 11px/1.7 Arial, sans-serif;
+    }
+    .footer strong { color: var(--rose-dark); font-weight: 700; }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; padding: 48px 0 42px; gap: 24px; }
+      .visual { min-height: 380px; }
+      .visual-frame { min-height: 365px; max-width: 340px; }
+      .sun { width: 180px; height: 180px; }
+      .flower { top: 70px; }
+      .quote-card { left: 0; bottom: 0; }
+      .steps { grid-template-columns: 1fr; }
+      .reward-panel { grid-template-columns: 1fr; gap: 15px; }
+      .terms-grid { grid-template-columns: 1fr; }
+      .private-note { text-align: right; max-width: 130px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">♡</span> A Little More Us</div>
+      <div class="private-note">A private invitation</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">A small daily promise</div>
+          <h1>Love lives in the little <em>things.</em></h1>
+          <p class="hero-copy">
+            The everyday moments can be the ones we remember longest: a thoughtful gesture,
+            a silly laugh, or the simple feeling of being understood. This is an invitation
+            to slow down for a few minutes each day and put those moments into words.
+          </p>
+          <p class="hero-copy"><strong>One thing you appreciate. One moment you want to remember. Every day.</strong></p>
+          <div class="actions">
+            <a class="button button-primary" href="#how-it-works">Explore the journey <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="#participation">Read the details</a>
+          </div>
+          <p class="tiny-note">A personal, private project — made to celebrate the story two people share.</p>
+        </div>
+
+        <div class="visual" aria-label="Decorative illustration of a flower and a romantic quote">
+          <div class="visual-frame">
+            <div class="sun"></div>
+            <div class="flower" aria-hidden="true">
+              <div class="stem"></div><div class="leaf"></div><div class="leaf two"></div>
+              <div class="petal"></div><div class="petal p2"></div><div class="petal p3"></div>
+              <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+              <div class="center"></div>
+            </div>
+          </div>
+          <div class="quote-card">
+            <div class="quote-mark">“</div>
+            <p>Pay attention to the moments you would want to keep forever.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="section-heading">
+          <div class="eyebrow">A few minutes, just for us</div>
+          <h2>A daily pause to appreciate your relationship.</h2>
+          <p>No perfect words are needed. Just a little honesty, a memory, and a moment to reflect.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-number">01 / APPRECIATE</div>
+            <h3>Something you value</h3>
+            <p>Write one thing you appreciated about your partner that day — a quality, a gesture, or something small that made you smile.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">02 / REMEMBER</div>
+            <h3>A moment worth keeping</h3>
+            <p>Describe one favorite moment from your relationship. It can be a big milestone or an ordinary moment that meant a lot to you.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">03 / CHECK IN</div>
+            <h3>Submit your reflection</h3>
+            <p>Send your entry through the daily form. If you submit outside the suggested time, add a short explanation in the late-entry field.</p>
+          </article>
+        </div>
+        <div class="language-band">Write in the language that feels most natural to you — <strong>Hindi or English</strong> are both welcome.</div>
+      </section>
+
+      <section class="section" id="rewards">
+        <div class="reward-panel">
+          <div>
+            <div class="eyebrow">Time and effort matter</div>
+            <h2>A journey that grows with time.</h2>
+            <p>The reward plan begins with the first month and increases at the stated three-month milestones. Please read and agree to the participation terms before starting.</p>
+          </div>
+          <div class="milestones" aria-label="Reward progression">
+            <div class="milestone"><div><span>Initial monthly reward</span><br><b>First stage</b></div><strong>₹1,000</strong></div>
+            <div class="milestone"><div><span>After the first three-month stage</span><br><b>Second stage</b></div><strong>₹2,000</strong></div>
+            <div class="milestone"><div><span>After the next three-month stage</span><br><b>Third stage</b></div><strong>₹4,000</strong></div>
+            <p style="margin:4px 2px 0;font-size:12px;">Occasional bonus rewards may also be offered. Any bonus and its conditions will be explained when offered.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="participation">
+        <div class="section-heading">
+          <div class="eyebrow">Before you begin</div>
+          <h2>The details, clearly explained.</h2>
+          <p>This is a private arrangement, so the expectations should be understood before the first entry.</p>
+        </div>
+        <div class="terms-grid">
+          <div class="term">
+            <div class="term-icon">♡</div>
+            <div><strong>Daily reflection</strong><p>Complete one appreciation and one shared-memory entry each day for the agreed monthly period.</p></div>
+          </div>
+          <div class="term">
+            <div class="term-icon">◷</div>
+            <div><strong>Suggested submission window</strong><p>Please aim to submit between <b>10:00 a.m. and 12:00 p.m. IST</b>. The form remains available at other times; if you're late, briefly explain why in the entry.</p></div>
+          </div>
+          <div class="term">
+            <div class="term-icon">₹</div>
+            <div><strong>Reward timing</strong><p>The initial ₹1,000 reward is intended to be paid on Day 1 after the first entry. The remaining daily entries are then completed for the month, subject to the agreed terms.</p></div>
+          </div>
+          <div class="term">
+            <div class="term-icon">✓</div>
+            <div><strong>Missed-completion condition</strong><p>The proposed terms include a ₹100 charge if the agreed monthly commitment is not completed. This condition should be discussed and voluntarily agreed to in advance, including how exceptions are handled.</p></div>
+          </div>
+        </div>
+        <p class="tiny-note" style="max-width:760px;margin:18px auto 0;text-align:center;">
+          This is a personal project, not a public program run by an outside company. Participation, the reward schedule, and any missed-completion condition should be agreed to freely and understood before beginning.
+        </p>
+      </section>
+
+      <section class="section">
+        <div class="closing">
+          <div class="heart">♡</div>
+          <h2>Because the little things are part of your story.</h2>
+          <p>Take a breath, think of a moment that mattered, and write it down in your own words. There is no need to make it sound perfect — it only needs to be honest.</p>
+          <a class="button button-primary" href="#how-it-works">Read how it works <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <strong>A Little More Us</strong><br>
+      A private relationship-reflection project · Hindi and English welcome
+    </footer>
+  </div>
+</body>
+</html>

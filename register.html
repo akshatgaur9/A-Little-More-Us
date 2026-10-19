@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little More Us — Couple Verification & Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #fcf9f6;
+      --card-bg: #ffffff;
+      --accent-rose: #d67a8b;
+      --accent-wine: #6e1a2f;
+      --accent-gold: #c29553;
+      --text-dark: #2c2527;
+      --text-muted: #6b5e62;
+      --border-subtle: #f0e3e5;
+      --shadow-soft: 0 10px 30px rgba(110, 26, 47, 0.06);
+      --shadow-hover: 0 14px 40px rgba(110, 26, 47, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      color: var(--accent-wine);
+    }
+
+    /* Top Navigation Bar */
+    .navbar {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      background-color: #ffffff;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      text-decoration: none;
+      color: var(--accent-wine);
+    }
+
+    .back-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent-rose);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-wine);
+    }
+
+    /* Main Content Area */
+    main {
+      flex: 1;
+      padding: 60px 0 80px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 45px 40px;
+      width: 100%;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      background-color: #f7e4e7;
+      color: var(--accent-wine);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .header-text {
+      margin-bottom: 30px;
+    }
+
+    .header-text h1 {
+      font-size: 2rem;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .header-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-wine);
+      margin-bottom: 6px;
+    }
+
+    .hint {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 13px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      border: 1px solid #dcb5bd;
+      border-radius: 8px;
+      background-color: #fdfcfb;
+      color: var(--text-dark);
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-wine);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(110, 26, 47, 0.08);
+    }
+
+    /* Custom File Upload Box */
+    .file-dropzone {
+      position: relative;
+      border: 1.5px dashed #dcb5bd;
+      border-radius: 10px;
+      background: #fdfafb;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .file-dropzone:hover {
+      border-color: var(--accent-wine);
+      background: #faf4f5;
+    }
+
+    .file-dropzone input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-dropzone .icon {
+      font-size: 1.5rem;
+      color: var(--accent-rose);
+      margin-bottom: 6px;
+    }
+
+    .file-dropzone .upload-label {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .file-dropzone .file-name {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--accent-wine);
+      font-weight: 600;
+      display: none;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--accent-wine);
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(110, 26, 47, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #551222;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(110, 26, 47, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px 0;
+      font-size: 0.85rem;
+      color: #8c7e82;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 30px 20px;
+      }
+      .header-text h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="brand-title"><h3>A Little More Us</h3></a>
+      <a href="index.html" class="back-link">← Back to Overview</a>
+    </div>
+  </nav>
+
+  <!-- Registration Card -->
+  <main>
+    <div class="container">
+      <div class="card">
+        <span class="badge">Initial Verification</span>
+        
+        <div class="header-text">
+          <h1>Couple Registration</h1>
+          <p>Please provide your contact information and photos to complete verification for the 30-day journey.</p>
+        </div>
+
+        <!-- Form: Sends files and inputs to your designated email -->
+        <form action="https://formsubmit.co/akshatgaur9569@gmail.com" method="POST" enctype="multipart/form-data">
+          <!-- Form configuration tags -->
+          <input type="hidden" name="_subject" value="New Couple Registration & Verification Photos">
+          <input type="hidden" name="_captcha" value="false">
+
+          <!-- 1. Email Address -->
+          <div class="form-group">
+            <label for="email">Participant Email Address</label>
+            <span class="hint">The email address you will use for your daily reflections.</span>
+            <input type="email" id="email" name="email" class="form-control" placeholder="name@example.com" required>
+          </div>
+
+          <!-- 2. Her Photo -->
+          <div class="form-group">
+            <label>Your Photo</label>
+            <span class="hint">A clear picture of yourself.</span>
+            <div class="file-dropzone">
+              <input type="file" name="participant_photo" accept="image/*" required onchange="showFileName(this, 'fileName1')">
+              <div class="icon">📷</div>
+              <div class="upload-label">Choose an image or drag & drop here</div>
+              <div id="fileName1" class="file-name"></div>
+            </div>
+          </div>
+
+          <!-- 3. Partner's Photo -->
+          <div class="form-group">
+            <label>Partner's Photo</label>
+            <span class="hint">A clear picture of your partner.</span>
+            <div class="file-dropzone">
+              <input type="file" name="partner_photo" accept="image/*" required onchange="showFileName(this, 'fileName2')">
+              <div class="icon">📷</div>
+              <div class="upload-label">Choose an image or drag & drop here</div>
+              <div id="fileName2" class="file-name"></div>
+            </div>
+          </div>
+
+          <!-- 4. Proof of Relationship -->
+          <div class="form-group">
+            <label>Relationship Proof / Memory</label>
+            <span class="hint">A photo together, a shared snapshot, or a moment that represents your bond.</span>
+            <div class="file-dropzone">
+              <input type="file" name="relationship_proof" accept="image/*" required onchange="showFileName(this, 'fileName3')">
+              <div class="icon">📸</div>
+              <div class="upload-label">Choose an image or drag & drop here</div>
+              <div id="fileName3" class="file-name"></div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-submit">Complete Registration</button>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>A Little More Us — Dedicated Couple Verification Portal</p>
+    </div>
+  </footer>
+
+  <!-- Light script to display chosen file names -->
+  <script>
+    function showFileName(input, targetId) {
+      const displayElement = document.getElementById(targetId);
+      if (input.files && input.files.length > 0) {
+        displayElement.textContent = "Selected: " + input.files[0].name;
+        displayElement.style.display = "block";
+      } else {
+        displayElement.textContent = "";
+        displayElement.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
